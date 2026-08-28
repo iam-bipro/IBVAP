@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+/*
+  SentinelX — "Ink & Verdigris"
+  ---------------------------------------------------------------
+  Palette logic: a coin's own chemistry. Copper left alone forms
+  two things — a green-blue patina (verdigris) where it's stable,
+  and a red-brown oxide (rust) where it's wearing away. That split
+  maps directly onto money: verdigris = savings / income / growth,
+  oxide = expense / loss, and a third tone (aged brass) marks the
+  in-between — a budget nearing its limit.
+
+  Neutrals lean slightly green-black rather than true gray/cream,
+  so the whole UI reads as one material instead of "brand color on
+  generic gray." Everything below is a raw hex value — no HSL/OKLCH
+  math to decode later.
+*/
+
+:root {
+  --radius: 0.625rem;
+
+  /* Surfaces */
+  --background: #f5f7f6;
+  --foreground: #142420;
+  --card: #ffffff;
+  --card-foreground: #142420;
+  --popover: #ffffff;
+  --popover-foreground: #142420;
+
+  /* Brand — verdigris */
+  --primary: #2e6b58;
+  --primary-foreground: #f5f7f6;
+
+  /* Structure */
+  --secondary: #e8ede9;
+  --secondary-foreground: #1c2e28;
+  --muted: #e8ede9;
+  --muted-foreground: #5e716a;
+  --accent: #e8ede9;
+  --accent-foreground: #1c2e28;
+  --border: #dce4df;
+  --input: #dce4df;
+  --ring: #2e6b58;
+
+  /* Semantic — the three metals */
+  --positive: #2e7d5b;   /* income, under-budget, growth   */
+  --negative: #b4472e;   /* expense, over-budget, decline  */
+  --warning: #b4831f;    /* nearing a limit, needs a look  */
+  --destructive: #b4472e;
+  --destructive-foreground: #f5f7f6;
+
+  /* Chart categories — same family, spaced for legibility */
+  --chart-1: #2e7d5b;
+  --chart-2: #b4472e;
+  --chart-3: #b4831f;
+  --chart-4: #4c6b8a;
+  --chart-5: #8a5a7a;
+
+  /* Sidebar / studio-nav */
+  --sidebar: #eef2f0;
+  --sidebar-foreground: #142420;
+  --sidebar-primary: #2e6b58;
+  --sidebar-primary-foreground: #f5f7f6;
+  --sidebar-accent: #e0e8e3;
+  --sidebar-accent-foreground: #1c2e28;
+  --sidebar-border: #d5ded8;
+  --sidebar-ring: #2e6b58;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.dark {
+  /* Surfaces */
+  --background: #0d1512;
+  --foreground: #e7efea;
+  --card: #131c18;
+  --card-foreground: #e7efea;
+  --popover: #131c18;
+  --popover-foreground: #e7efea;
+
+  /* Brand — verdigris, lifted for contrast on dark */
+  --primary: #4fae8c;
+  --primary-foreground: #0d1512;
+
+  /* Structure */
+  --secondary: #1b2621;
+  --secondary-foreground: #e7efea;
+  --muted: #1b2621;
+  --muted-foreground: #8ca69b;
+  --accent: #1b2621;
+  --accent-foreground: #e7efea;
+  --border: #223027;
+  --input: #223027;
+  --ring: #4fae8c;
+
+  /* Semantic — the three metals, brightened for dark surfaces */
+  --positive: #4fae8c;
+  --negative: #e0745a;
+  --warning: #d6a44d;
+  --destructive: #e0745a;
+  --destructive-foreground: #0d1512;
+
+  /* Chart categories */
+  --chart-1: #4fae8c;
+  --chart-2: #e0745a;
+  --chart-3: #d6a44d;
+  --chart-4: #7da0c4;
+  --chart-5: #b586a8;
+
+  /* Sidebar / studio-nav */
+  --sidebar: #101a16;
+  --sidebar-foreground: #e7efea;
+  --sidebar-primary: #4fae8c;
+  --sidebar-primary-foreground: #0d1512;
+  --sidebar-accent: #1b2621;
+  --sidebar-accent-foreground: #e7efea;
+  --sidebar-border: #223027;
+  --sidebar-ring: #4fae8c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-warning: var(--warning);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 25%, transparent);
+  }
+}
