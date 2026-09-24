@@ -1,30 +1,15 @@
 {
   "name": "sentinelx",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "SentinelX — Intelligent Behaviour & Vehicle Analysis Platform (IBVAP). Next.js frontend + FastAPI backend monorepo.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@supabase/ssr": "^0.12.4",
-    "@supabase/supabase-js": "^2.112.0",
-    "lucide-react": "^1.28.0",
-    "next": "16.2.12",
-    "next-themes": "^0.4.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.12",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "dev":       "npm run dev   --prefix apps/web",
+    "build":     "npm run build --prefix apps/web",
+    "start":     "npm run start --prefix apps/web",
+    "lint":      "npm run lint  --prefix apps/web",
+    "dev:api":   "cd apps/api && uvicorn app.main:app --reload --port 8000",
+    "install:web": "npm install --prefix apps/web",
+    "install:api": "cd apps/api && pip install -r requirements.txt"
   }
 }
