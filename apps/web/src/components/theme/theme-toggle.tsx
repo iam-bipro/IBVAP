@@ -9,7 +9,8 @@ export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timeoutId = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timeoutId);
   }, []);
 
   if (!mounted) return null;
@@ -27,16 +28,11 @@ export default function ThemeToggle() {
     }
   };
 
-  const Icon = () => {
-    switch (theme) {
-      case "light":
-        return <Sun className="h-5 w-5" />;
-      case "dark":
-        return <Moon className="h-5 w-5" />;
-      default:
-        return <Monitor className="h-5 w-5" />;
-    }
-  };
+  const icon = theme === "light"
+    ? <Sun className="h-5 w-5" />
+    : theme === "dark"
+      ? <Moon className="h-5 w-5" />
+      : <Monitor className="h-5 w-5" />;
 
   return (
     <button
@@ -45,7 +41,7 @@ export default function ThemeToggle() {
       aria-label={`Current theme: ${theme}`}
       title={`Theme: ${theme}`}
     >
-      <Icon />
+      {icon}
     </button>
   );
 }
