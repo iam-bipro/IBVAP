@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SentinelX",
-  description: "A polished money workspace for tracking budgets and goals.",
+  title: "IBVAP",
+  description: "Intelligent Border Video Analytics Platform.",
 };
 
 export default function RootLayout({

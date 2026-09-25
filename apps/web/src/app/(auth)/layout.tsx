@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Auth - SentinelX",
+  title: "Auth - IBVAP",
   description: "Get started",
 };
 

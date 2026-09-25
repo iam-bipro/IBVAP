@@ -8,7 +8,7 @@ export default async function ProtectedLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  const isDemo = cookieStore.get("sentinelx-demo-user")?.value === "true";
+  const isDemo = cookieStore.get("ibvap-demo-user")?.value === "true";
 
   // If in demo mode or demo cookie exists, allow access directly
   if (isDemo) {

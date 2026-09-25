@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import SentinelLogo from "@/components/ui/SentinelLogo";
+import IbvapLogo from "@/components/ui/IbvapLogo";
 import { ShieldCheck, ArrowRight, Video, Radio } from "lucide-react";
 
 export default function Onboard() {
@@ -28,7 +28,7 @@ export default function Onboard() {
     }
     // Set demo cookie as well for resiliency
     if (typeof document !== "undefined") {
-      document.cookie = "sentinelx-demo-user=true; path=/; max-age=604800";
+      document.cookie = "ibvap-demo-user=true; path=/; max-age=604800";
     }
     router.replace("/dashboard");
     router.refresh();
@@ -39,7 +39,7 @@ export default function Onboard() {
       <div className="w-full max-w-lg rounded-4xl border border-border/80 bg-card/85 p-8 shadow-2xl backdrop-blur-xl sm:p-10">
         <div className="flex items-center gap-3 text-primary mb-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10">
-            <SentinelLogo className="h-7 w-7" />
+            <IbvapLogo className="h-7 w-7" />
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground">

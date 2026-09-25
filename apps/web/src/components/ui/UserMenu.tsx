@@ -10,8 +10,8 @@ export default function UserMenu() {
   const supabase = createClient();
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const [userName, setUserName] = useState("SentinelX");
-  const [email, setEmail] = useState("bop01@sentinelx.local");
+  const [userName, setUserName] = useState("IBVAP");
+  const [email, setEmail] = useState("bop01@ibvap.local");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,9 +32,9 @@ export default function UserMenu() {
           const resolvedName =
             user?.user_metadata?.full_name ||
             user?.email?.split("@")[0] ||
-            "SentinelX";
+            "IBVAP";
           setUserName(resolvedName);
-          setEmail(user?.email || "officer@sentinelx.local");
+          setEmail(user?.email || "officer@ibvap.local");
           setIsAuthenticated(true);
           setIsDemo(false);
           setIsLoading(false);
@@ -47,12 +47,12 @@ export default function UserMenu() {
       // Check for demo cookie
       const hasDemoCookie =
         typeof document !== "undefined" &&
-        document.cookie.includes("sentinelx-demo-user=true");
+        document.cookie.includes("ibvap-demo-user=true");
 
       if (isMounted) {
         if (hasDemoCookie) {
           setUserName("Officer (Demo)");
-          setEmail("bop01@sentinelx.local");
+          setEmail("bop01@ibvap.local");
           setIsAuthenticated(true);
           setIsDemo(true);
         } else {
@@ -85,7 +85,7 @@ export default function UserMenu() {
       // ignore
     }
     if (typeof document !== "undefined") {
-      document.cookie = "sentinelx-demo-user=; path=/; max-age=0";
+      document.cookie = "ibvap-demo-user=; path=/; max-age=0";
     }
     setIsOpen(false);
     router.replace("/auth");

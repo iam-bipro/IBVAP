@@ -1,6 +1,6 @@
-# SentinelX
+# IBVAP
 
-> **Intelligent Behaviour & Vehicle Analysis Platform (IBVAP)**  
+> **Intelligent Border Video Analytics Platform (IBVAP)**
 > Real-time CCTV surveillance with perimeter breach detection, loitering alerts, wrong-way vehicle tracking, and ANPR.
 
 📖 **[Full Architecture & Technical Deep Dive →](ARCHITECTURE.md)**
@@ -10,7 +10,7 @@
 ## Monorepo Layout
 
 ```
-SentinelX/
+ibvap/
 ├── apps/
 │   ├── web/          # Next.js 16 frontend  (React 19 · Tailwind 4 · TypeScript)
 │   └── api/          # FastAPI backend       (Python · YOLOv8 · EasyOCR)

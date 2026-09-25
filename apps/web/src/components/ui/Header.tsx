@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import SentinelLogo from "@/components/ui/SentinelLogo";
+import IbvapLogo from "@/components/ui/IbvapLogo";
 import UserMenu from "@/components/ui/UserMenu";
 import { LayoutDashboard, SlidersHorizontal, ShieldCheck } from "lucide-react";
 
@@ -18,12 +18,12 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3 transition hover:opacity-90">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 shadow-sm">
-            <SentinelLogo className="h-6 w-6" />
+            <IbvapLogo className="h-6 w-6" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
               <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-primary">
-                SentinelX
+                IBVAP
               </span>
               <span className="rounded bg-primary/15 px-1.5 py-0.2 text-[9px] font-semibold text-primary">
                 v1.0

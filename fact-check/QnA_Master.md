@@ -1,4 +1,4 @@
-# SentinelX / IBVAP — Master Q&A Preparation Document
+# IBVAP — Master Q&A Preparation Document
 ### Fact-Checked Against Codebase · PS 26187 · MHA (SSB) · SIH 2026
 
 > **How to use this doc:** Every answer is grounded in what is *actually built*. Where a gap exists, it is clearly marked ⚠️ **GAP** so the team can either fix it or prepare an honest, graceful pivot. Never fabricate a metric. Never claim a feature that isn't in the code.
@@ -18,7 +18,7 @@ However, we go further:
 
 - **Non-flagged individuals**: We do not store their face crops at all. The `redact_faces()` function in `pipeline.py` applies a 51×51 Gaussian blur *before* the annotated frame is output. The blurred frame is what gets streamed and stored.
 - **Flagged individuals** (i.e., those who trigger a `PERIMETER_BREACH` or other CRITICAL event): only the alert JSON (bounding box coordinates, timestamp, track ID) is stored — not a face image in the current implementation.
-- **The raw RTSP feed** is never stored by SentinelX itself — it processes frame-by-frame in memory. Storage of raw footage is the responsibility of the existing DVR/NVR at the BOP, governed by SSB's existing data retention policy.
+- **The raw RTSP feed** is never stored by IBVAP itself — it processes frame-by-frame in memory. Storage of raw footage is the responsibility of the existing DVR/NVR at the BOP, governed by SSB's existing data retention policy.
 
 **Honest caveat to acknowledge:** This is a student prototype submitted to SIH, not a deployed system with a DPO sign-off. A production deployment would require a formal DPIA (Data Protection Impact Assessment) before going live.
 
@@ -38,14 +38,14 @@ Auditability: Every alert event is timestamped and logged to `alert_history` in 
 ### Q3. If your system wrongly flags an innocent civilian as a threat, who's accountable?
 
 **Honest Answer:**
-SentinelX is an alerting tool, not a decision-making system. Every alert carries a `confidence` score and a `severity` field. The system's role is to surface potential events — the **human operator makes the final decision** to act. We explicitly state this in our design: "The human is still in the loop for the final decision."
+IBVAP is an alerting tool, not a decision-making system. Every alert carries a `confidence` score and a `severity` field. The system's role is to surface potential events — the **human operator makes the final decision** to act. We explicitly state this in our design: "The human is still in the loop for the final decision."
 
 The accountability chain follows existing SSB protocol:
-1. **SentinelX** surfaces an alert — this is analogous to a CCTV operator raising a flag.
+1. **IBVAP** surfaces an alert — this is analogous to a CCTV operator raising a flag.
 2. The **operator** decides whether to dispatch personnel or dismiss.
 3. **Deployed personnel** decide whether to detain.
 
-A false positive at the SentinelX level costs: one unnecessary check by ground personnel. The false positive rate on perimeter breach is <3% after our 2-frame confirmation window (from benchmark data in the notebook).
+A false positive at the IBVAP level costs: one unnecessary check by ground personnel. The false positive rate on perimeter breach is <3% after our 2-frame confirmation window (from benchmark data in the notebook).
 
 For the vendor liability question in a real contract: that is governed by the SLA and indemnification clauses in the deployment contract — standard for any defence/govt IT procurement.
 
@@ -102,7 +102,7 @@ The geometry configuration API (`POST /api/v1/config/geometry`) requires authent
 **Honest Answer:**
 The video feed runs over RTSP within the **BOP's local LAN**. Video never traverses the public internet. At the network level:
 
-1. **Air-gapped LAN**: BOP camera networks are (and should be) on an isolated network segment, not connected to the internet backbone. The SentinelX server connects via `rtsp://[camera-local-ip]/stream`.
+1. **Air-gapped LAN**: BOP camera networks are (and should be) on an isolated network segment, not connected to the internet backbone. The IBVAP server connects via `rtsp://[camera-local-ip]/stream`.
 2. **IP allowlisting**: The backend can be configured to accept RTSP streams only from a whitelist of camera IPs.
 3. **RTSP authentication**: Modern IP cameras (Hikvision, CP Plus) support RTSP with username/password. We connect using authenticated RTSP URLs.
 
@@ -491,7 +491,7 @@ Fair pushback. Here is what we built vs. what we used:
 | Dashboard | **Built from scratch** — Next.js, real-time alert panel, stream viewer | Next.js + TailwindCSS |
 | Night enhancement | **Custom pipeline** — auto-darkness detection + CLAHE in LAB space | OpenCV CLAHE |
 
-The face model is one of seven components. The value of SentinelX is the **integration** — making all these pieces work together as a real-time pipeline with a unified alert output. That's what we built.
+The face model is one of seven components. The value of IBVAP is the **integration** — making all these pieces work together as a real-time pipeline with a unified alert output. That's what we built.
 
 ---
 
@@ -517,11 +517,11 @@ What happens in practice: detection range shrinks. A person at 50 meters in fog 
 
 ---
 
-### "Two names — is it IBVAP or SentinelX? Pick one."
+### "The product name is IBVAP."
 
-**The answer**: **SentinelX** is the product name. **IBVAP** (Intelligent Border Video Analytics Platform) is the technical/functional description used in the PS submission. They refer to the same system.
+**The answer**: **IBVAP** is the product name and the acronym for Intelligent Border Video Analytics Platform. It is the name used in the pitch, demo, business slides, and technical documentation.
 
-- Say "SentinelX" in the pitch, demo, and business slides.
+- Say "IBVAP" in the pitch, demo, and business slides.
 - Say "IBVAP" when referencing the PS number (PS 26187) and technical documentation.
 - Never use them interchangeably mid-sentence without explanation.
 
@@ -536,7 +536,7 @@ What happens in practice: detection range shrinks. A person at 50 meters in fog 
 - **Deployment target**: NVIDIA RTX 3060 8GB in a ~₹1 Lakh server build
 - **Demo right now**: [Your development machine's GPU — state it explicitly, e.g., "GTX 1650" or "RTX 3060"]
 
-"No new hardware" means: no new *cameras*. The existing IP cameras at the BOP are reused. The SentinelX server is new hardware — but it's a single commodity GPU server shared across an entire BOP cluster, not a per-camera hardware upgrade. The cost comparison is ₹1–1.5 Lakh per BOP cluster vs. ₹60–150 Lakh to replace all cameras with smart hardware.
+"No new hardware" means: no new *cameras*. The existing IP cameras at the BOP are reused. The IBVAP server is new hardware — but it's a single commodity GPU server shared across an entire BOP cluster, not a per-camera hardware upgrade. The cost comparison is ₹1–1.5 Lakh per BOP cluster vs. ₹60–150 Lakh to replace all cameras with smart hardware.
 
 ---
 
@@ -580,7 +580,7 @@ We are not claiming to have a procurement contract. We are demonstrating the sol
 ### "If your model is wrong and someone gets hurt because of a false negative, whose name is on that mistake?"
 
 **Honest Answer:**
-Ethically and legally: the system is a tool, not a decision-maker. The operator who chooses not to verify an alert (or isn't watching) bears the operational responsibility, per existing chain of command. SentinelX does not make arrest or use-of-force decisions — humans do.
+Ethically and legally: the system is a tool, not a decision-maker. The operator who chooses not to verify an alert (or isn't watching) bears the operational responsibility, per existing chain of command. IBVAP does not make arrest or use-of-force decisions — humans do.
 
 This is identical to the question "if a doctor misreads an MRI, whose fault is the misdiagnosis?" — the radiologist's, not the MRI machine manufacturer's, provided the machine functioned within its stated parameters.
 
@@ -659,7 +659,7 @@ Together: ExDark teaches the model to handle dark visible-spectrum input; LLVIP 
 ### Q: Where does "95% noise reduction" and "90% cost savings" come from?
 
 - **95% noise reduction**: Internal estimate comparing motion-detection false alerts vs. our class-filtered, geometry-confirmed alerts on the same test clips. Not third-party validated.
-- **90% cost savings**: Derived from cost comparison — ₹1–1.5 Lakh (SentinelX server) vs. ₹15–30 Lakh (dedicated smart camera hardware per unit) per deployment. Percentage varies by configuration; "up to 90%" is defensible.
+- **90% cost savings**: Derived from cost comparison — ₹1–1.5 Lakh (IBVAP server) vs. ₹15–30 Lakh (dedicated smart camera hardware per unit) per deployment. Percentage varies by configuration; "up to 90%" is defensible.
 - **What NOT to say**: "Our accuracy is 99%." The real number is mAP50 ~0.75–0.78.
 
 ---

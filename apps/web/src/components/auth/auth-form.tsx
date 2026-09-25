@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight, LockKeyhole, Sparkles, Shield, UserCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-import SentinelLogo from "@/components/ui/SentinelLogo";
+import IbvapLogo from "@/components/ui/IbvapLogo";
 
 interface AuthFormProps {
   initialTab?: "login" | "signup";
@@ -24,7 +24,7 @@ export default function AuthForm({ initialTab = "login" }: AuthFormProps) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   function handleDemoLogin() {
-    document.cookie = "sentinelx-demo-user=true; path=/; max-age=604800";
+    document.cookie = "ibvap-demo-user=true; path=/; max-age=604800";
     router.replace("/dashboard");
     router.refresh();
   }
@@ -89,7 +89,7 @@ export default function AuthForm({ initialTab = "login" }: AuthFormProps) {
       setIsLoading(false);
     } catch {
       setErrorMessage(
-        "Authentication service unreachable. Use 'Demo Operator Mode' below to explore SentinelX immediately."
+        "Authentication service unreachable. Use 'Demo Operator Mode' below to explore IBVAP immediately."
       );
       setIsLoading(false);
     }
@@ -101,11 +101,11 @@ export default function AuthForm({ initialTab = "login" }: AuthFormProps) {
         <div className="w-full max-w-xl rounded-4xl border border-border/80 bg-card/85 p-8 shadow-[0_30px_80px_rgba(20,36,32,0.18)] backdrop-blur-xl sm:p-10">
           <div className="mb-8 flex items-center gap-3 text-primary">
             <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-primary/20 bg-primary/10">
-              <SentinelLogo className="h-6 w-6" />
+              <IbvapLogo className="h-6 w-6" />
             </div>
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                SentinelX
+                IBVAP
               </p>
               <h1 className="text-xl font-semibold">
                 {activeTab === "login" ? "Operator Sign In" : "Register Operator"}
@@ -197,7 +197,7 @@ export default function AuthForm({ initialTab = "login" }: AuthFormProps) {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="officer@sentinelx.local"
+                placeholder="officer@ibvap.local"
                 className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground/60"
               />
             </div>
@@ -262,10 +262,10 @@ export default function AuthForm({ initialTab = "login" }: AuthFormProps) {
             Border Security AI
           </div>
           <h2 className="text-3xl font-bold tracking-tight">
-            Intelligent Behaviour & Vehicle Analysis
+            Intelligent Border Video Analytics Platform
           </h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            SentinelX augments existing standard CCTV hardware with edge-deployed
+            IBVAP augments existing standard CCTV hardware with edge-deployed
             YOLOv8 & ByteTrack analytics — alerting on virtual perimeter breach,
             wrong-way vehicle travel, restricted zone loitering, and license plates.
           </p>

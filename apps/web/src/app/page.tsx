@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Header from "@/components/ui/Header";
-import SentinelLogo from "@/components/ui/SentinelLogo";
+import IbvapLogo from "@/components/ui/IbvapLogo";
 import {
   ShieldAlert,
   Eye,
@@ -20,7 +20,7 @@ import {
 export default function Home() {
   const enterDashboard = () => {
     if (typeof document !== "undefined") {
-      document.cookie = "sentinelx-demo-user=true; path=/; max-age=604800";
+      document.cookie = "ibvap-demo-user=true; path=/; max-age=604800";
     }
   };
 
@@ -37,9 +37,9 @@ export default function Home() {
           </div>
 
           <h1 className="max-w-4xl text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground">
-            Intelligent Behaviour & <br />
+            Intelligent Border <br />
             <span className="bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent">
-              Vehicle Analysis Platform
+              Video Analytics Platform
             </span>
           </h1>
 
@@ -193,7 +193,7 @@ export default function Home() {
         {/* ── Call to action ───────────────────────────────────────────── */}
         <section className="rounded-4xl border border-primary/30 bg-card/80 p-8 sm:p-12 text-center backdrop-blur-xl shadow-xl">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/15 mb-4">
-            <SentinelLogo className="h-8 w-8" />
+            <IbvapLogo className="h-8 w-8" />
           </div>
           <h2 className="text-2xl font-bold sm:text-3xl text-foreground">
             Ready to inspect the live surveillance studio?

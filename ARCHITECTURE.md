@@ -1,6 +1,6 @@
-# SentinelX — Architecture & Technical Deep Dive
+# IBVAP — Architecture & Technical Deep Dive
 
-> **IBVAP** · Intelligent Behaviour and Vehicle Analysis Platform  
+> **IBVAP** · Intelligent Border Video Analytics Platform
 > Smart India Hackathon 2026 · Problem Code **DFS404**
 
 ---
@@ -30,7 +30,7 @@
 
 ## 1. System Overview
 
-SentinelX is a **real-time AI surveillance platform** that ingests live CCTV video feeds, applies multi-model computer vision, and delivers actionable security alerts to operators in under 50 ms.
+IBVAP is a **real-time AI surveillance platform** that ingests live CCTV video feeds, applies multi-model computer vision, and delivers actionable security alerts to operators in under 50 ms.
 
 ```
 Multiple CCTV Cameras
@@ -74,7 +74,7 @@ Multiple CCTV Cameras
 ## 2. Repository Structure
 
 ```
-SentinelX/
+ibvap/
 ├── apps/
 │   ├── web/                        # Next.js 16 frontend
 │   │   ├── src/
@@ -186,8 +186,8 @@ Camera N  ───────────────────────�
 
 **Redis commands used:**
 ```bash
-LPUSH  sentinelx:events  <frame_payload>   # Camera pushes
-BRPOP  sentinelx:events  0                 # Worker blocks and pops
+LPUSH  ibvap:events  <frame_payload>   # Camera pushes
+BRPOP  ibvap:events  0                 # Worker blocks and pops
 ```
 
 > **Current state:** The existing `pipeline.py` processes frames synchronously (no Redis yet). Redis integration is the next infrastructure milestone — it unlocks horizontal scaling by adding more AI worker processes.

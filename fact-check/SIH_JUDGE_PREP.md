@@ -1,4 +1,4 @@
-# 🛡️ SentinelX — SIH 2026 Judge Preparation Guide
+# 🛡️ IBVAP — SIH 2026 Judge Preparation Guide
 ### PS ID: 26187 | Ministry of Home Affairs (SSB) | IBVAP
 
 > **Golden Rule for Presentation:**
@@ -48,11 +48,11 @@ That's the one-liner for your pitch. **Memorize it.**
 
 ---
 
-## 🚀 Section 2 — Your Solution (SentinelX / IBVAP) — Explain Simply
+## 🚀 Section 2 — Your Solution (IBVAP) — Explain Simply
 
 ### The Elevator Pitch (30 seconds)
 
-> *"SentinelX is a pure-software AI layer that connects to any existing IP CCTV camera over the network. It watches all feeds simultaneously, detects humans, vehicles, and number plates in real time, fires instant alerts for intrusions, and works in the dark — all without buying a single new camera or specialized hardware chip."*
+> *"IBVAP is a pure-software AI layer that connects to any existing IP CCTV camera over the network. It watches all feeds simultaneously, detects humans, vehicles, and number plates in real time, fires instant alerts for intrusions, and works in the dark — all without buying a single new camera or specialized hardware chip."*
 
 ### How It Works — The 5-Step Pipeline
 
@@ -86,7 +86,7 @@ That's the one-liner for your pitch. **Memorize it.**
 
 ### "Why not just use commercial software like Milestone, Genetec, or Avigilon?"
 
-> *"Those are excellent products — for corporate campuses and airports. They cost ₹20–50 Lakh per deployment for full analytics licenses. Sashastra Seema Bal operates 182+ BOPs, many in areas with unreliable power and no internet backbone. A ₹50K server running SentinelX can serve an entire BOP cluster. That's the difference."*
+> *"Those are excellent products — for corporate campuses and airports. They cost ₹20–50 Lakh per deployment for full analytics licenses. Sashastra Seema Bal operates 182+ BOPs, many in areas with unreliable power and no internet backbone. A ₹50K server running IBVAP can serve an entire BOP cluster. That's the difference."*
 
 ### "Why not just Motion Detection? It's simpler."
 
@@ -94,11 +94,11 @@ That's the one-liner for your pitch. **Memorize it.**
 
 ### "Why not use thermal/IR cameras?"
 
-> *"We'd love to. The problem is cost: a single Pan-Tilt-Zoom thermal camera costs ₹3–8 Lakh. SSB has thousands of existing visible-spectrum cameras. Replacing them is a 5-year budget cycle. SentinelX gives their existing cameras thermal-like night awareness through CLAHE enhancement, trained on the LLVIP dataset (which simulates infrared paired images). We don't replace hardware — we make it smarter."*
+> *"We'd love to. The problem is cost: a single Pan-Tilt-Zoom thermal camera costs ₹3–8 Lakh. SSB has thousands of existing visible-spectrum cameras. Replacing them is a 5-year budget cycle. IBVAP gives their existing cameras thermal-like night awareness through CLAHE enhancement, trained on the LLVIP dataset (which simulates infrared paired images). We don't replace hardware — we make it smarter."*
 
 ### "Why not just hire more guards?"
 
-> *"That's the other option. The problem is human cognitive load. Research shows human vigilance degrades sharply after 20–30 minutes of monotonous watching. You'd need 3 shifts × multiple guards per BOP × 182 BOPs = thousands of extra personnel. SentinelX doesn't get tired, doesn't get distracted, and doesn't blink."*
+> *"That's the other option. The problem is human cognitive load. Research shows human vigilance degrades sharply after 20–30 minutes of monotonous watching. You'd need 3 shifts × multiple guards per BOP × 182 BOPs = thousands of extra personnel. IBVAP doesn't get tired, doesn't get distracted, and doesn't blink."*
 
 ---
 
@@ -106,7 +106,7 @@ That's the one-liner for your pitch. **Memorize it.**
 
 ### Computer Vision Edge Cases
 
-| Edge Case | How SentinelX Handles It |
+| Edge Case | How IBVAP Handles It |
 |---|---|
 | **Two people crossing the fence simultaneously** | ByteTrack assigns unique persistent IDs — each person tracked independently. Both breaches logged separately |
 | **Person briefly hidden behind a tree/pillar (occlusion)** | ByteTrack re-associates the same track ID when person re-appears (using Kalman filter prediction) |
@@ -145,7 +145,7 @@ That's the one-liner for your pitch. **Memorize it.**
 ### On the Problem
 
 **Q: How is this different from what CCTNS or existing MHA surveillance systems do?**
-> "CCTNS (Crime and Criminal Tracking Network) is a database and case management system — it doesn't do video analytics. Existing MHA video surveillance is largely passive recording. SentinelX adds the active intelligence layer on top of existing infrastructure. It's complementary, not competing."
+> "CCTNS (Crime and Criminal Tracking Network) is a database and case management system — it doesn't do video analytics. Existing MHA video surveillance is largely passive recording. IBVAP adds the active intelligence layer on top of existing infrastructure. It's complementary, not competing."
 
 **Q: Has SSB actually asked for this? Do they know what they want?**
 > "The PS was published by SSB's Police II Division on the SIH portal. They explicitly listed the required capabilities — FRS, ANPR, intrusion detection, night-time monitoring — and explicitly asked for a software-only solution because hardware upgrades are cost-prohibitive at scale. We're solving their stated problem."
@@ -183,7 +183,7 @@ That's the one-liner for your pitch. **Memorize it.**
 > "Most modern IP cameras (Hikvision, Dahua, CP Plus — the dominant brands in India) output RTSP streams natively. For legacy analog cameras, a ₹5,000 IP converter bridges the gap. The backend connects via `rtsp://[camera-ip]/stream` — no physical modification to cameras."
 
 **Q: What about bandwidth? BOPs have terrible connectivity.**
-> "SentinelX runs on-premise. Video never leaves the BOP LAN. The only data going out is the alert notification (a small JSON payload, ~1KB). We can operate on a 2G cellular data connection for alerts while video stays local. Zero cloud dependency."
+> "IBVAP runs on-premise. Video never leaves the BOP LAN. The only data going out is the alert notification (a small JSON payload, ~1KB). We can operate on a 2G cellular data connection for alerts while video stays local. Zero cloud dependency."
 
 **Q: What if the AI goes wrong and misses a real intrusion?**
 > "No system is perfect — and neither are human guards. Our claim is not 100% detection, but a significant improvement in detection rate over purely manual monitoring while reducing response time from 'someone happened to be looking' to sub-second. Every alert includes a confidence score so operators can triage accordingly. The human is still in the loop for the final decision."
@@ -193,7 +193,7 @@ That's the one-liner for your pitch. **Memorize it.**
 ### On Business Model & Scale
 
 **Q: Who pays for this? SSB doesn't have a procurement budget for software startups.**
-> "This is SIH — the output is a prototype handed to SSB. The procurement pathway is through MHA's existing IT procurement under the Defence Procurement Procedure or through GeM (Government e-Marketplace). We've mapped SentinelX to CPSEs (BSNL, BEL, ECIL) who could license and deploy it. We're not selling to SSB directly — we're building something SSB asks BSNL or BEL to operationalize."
+> "This is SIH — the output is a prototype handed to SSB. The procurement pathway is through MHA's existing IT procurement under the Defence Procurement Procedure or through GeM (Government e-Marketplace). We've mapped IBVAP to CPSEs (BSNL, BEL, ECIL) who could license and deploy it. We're not selling to SSB directly — we're building something SSB asks BSNL or BEL to operationalize."
 
 **Q: Can this scale to all 182 BOPs?**
 > "Yes, by design. The architecture is stateless: each BOP runs its own server. No central server required. A central command dashboard can aggregate alerts from all BOPs using a lightweight MQTT broker. Scaling to 182 BOPs means deploying 182 identical server instances — no architectural change."
@@ -221,13 +221,13 @@ That's the one-liner for your pitch. **Memorize it.**
 |---|---|---|
 | Dedicated smart camera hardware (×20 cameras) | ₹60–150 Lakh | ₹5–10 Lakh (maintenance) |
 | Proprietary video analytics software (cloud) | ₹10–20 Lakh/year | ₹10–20 Lakh |
-| **SentinelX (one GPU server + software)** | **₹1–1.5 Lakh** | **₹0 (on-premise, open model)** |
+| **IBVAP (one GPU server + software)** | **₹1–1.5 Lakh** | **₹0 (on-premise, open model)** |
 
 ### Revenue Paths
 
 ```
 Path 1: Government Procurement
-SentinelX (prototype) → SIH Submission → MHA Evaluation
+IBVAP (prototype) → SIH Submission → MHA Evaluation
 → GeM Listing → SSB/BSF/CRPF Tender → Deployment Contract
 Timeline: 18–36 months
 
@@ -261,15 +261,15 @@ Timeline: 24–48 months
 ### Why This is Meaningful
 - SSB has already spent crores on cameras. That sunk cost doesn't go away.
 - Asking them to replace all cameras is a 10-year procurement nightmare.
-- SentinelX makes the existing investment intelligent — today.
+- IBVAP makes the existing investment intelligent — today.
 
 ---
 
 ## 🌍 Section 8 — Day-to-Day Analogy (For Non-Technical Judges)
 
-> *"Think of CCTV cameras like a dashcam in a car. A dashcam records — but it doesn't tell you when you're speeding, when someone cuts lanes dangerously, or when there's a pothole ahead. Those alerts need a smart layer — like the driver assistance system. SentinelX is that driver assistance system, plugged into cameras already installed at the border."*
+> *"Think of CCTV cameras like a dashcam in a car. A dashcam records — but it doesn't tell you when you're speeding, when someone cuts lanes dangerously, or when there's a pothole ahead. Those alerts need a smart layer — like the driver assistance system. IBVAP is that driver assistance system, plugged into cameras already installed at the border."*
 
-> *"Or think of it like Truecaller for cameras. Your phone already has a call function. Truecaller adds spam detection intelligence on top of that existing function — no new hardware. That's what SentinelX does for CCTV."*
+> *"Or think of it like Truecaller for cameras. Your phone already has a call function. Truecaller adds spam detection intelligence on top of that existing function — no new hardware. That's what IBVAP does for CCTV."*
 
 ---
 
@@ -310,11 +310,11 @@ Timeline: 24–48 months
 >
 > *Smart surveillance hardware that solves this problem costs ₹15–30 Lakh per unit, making large-scale deployment across 182+ BOPs practically impossible.*
 >
-> *SentinelX is a software-only AI platform. We connect to your existing IP cameras over the network. We watch every feed simultaneously. We detect intrusions in real time, read vehicle number plates, track suspicious behavior, and see in near-darkness — without buying a single new camera.*
+> *IBVAP is a software-only AI platform. We connect to your existing IP cameras over the network. We watch every feed simultaneously. We detect intrusions in real time, read vehicle number plates, track suspicious behavior, and see in near-darkness — without buying a single new camera.*
 >
 > *Let me show you how."*
 
 ---
 
 *Built for SIH 2026 | PS 26187 | Ministry of Home Affairs — Sashastra Seema Bal*
-*"SentinelX doesn't ask the border to buy new eyes. It teaches the eyes it already has to think."*
+*"IBVAP doesn't ask the border to buy new eyes. It teaches the eyes it already has to think."*

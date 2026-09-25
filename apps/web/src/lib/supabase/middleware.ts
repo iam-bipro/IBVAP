@@ -8,11 +8,11 @@ export async function updateSession(request: NextRequest) {
 
   // Check for demo bypass session or demo URL param
   const demoParam = request.nextUrl.searchParams.get("demo");
-  const isDemoCookie = request.cookies.get("sentinelx-demo-user")?.value === "true";
+  const isDemoCookie = request.cookies.get("ibvap-demo-user")?.value === "true";
   const isDemo = isDemoCookie || demoParam === "true";
 
   if (demoParam === "true" && !isDemoCookie) {
-    response.cookies.set("sentinelx-demo-user", "true", {
+    response.cookies.set("ibvap-demo-user", "true", {
       path: "/",
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });

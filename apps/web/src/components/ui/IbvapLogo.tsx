@@ -1,4 +1,4 @@
-export default function SentinelLogo({
+export default function IbvapLogo({
   className = "h-6 w-6",
 }: {
   className?: string;

@@ -1,8 +1,8 @@
 {
-  "name": "sentinelx",
+  "name": "ibvap",
   "version": "1.0.0",
   "private": true,
-  "description": "SentinelX — Intelligent Behaviour & Vehicle Analysis Platform (IBVAP). Next.js frontend + FastAPI backend monorepo.",
+  "description": "IBVAP — Intelligent Border Video Analytics Platform. Next.js frontend + FastAPI backend monorepo.",
   "scripts": {
     "dev":       "npm run dev   --prefix apps/web",
     "build":     "npm run build --prefix apps/web",
