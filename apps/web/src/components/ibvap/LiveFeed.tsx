@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ShieldAlert,
   Clock,
@@ -10,8 +10,6 @@ import {
   RefreshCw,
   Wifi,
   WifiOff,
-  Video,
-  Play,
   Activity,
 } from "lucide-react";
 import { getStreamUrl } from "@/lib/ibvap/client";
@@ -58,11 +56,11 @@ export default function LiveFeed() {
   useEffect(() => {
     if (!isSimulated) return;
 
-    setStreamState("live");
+    const stateTimeoutId = setTimeout(() => setStreamState("live"), 0);
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return () => clearTimeout(stateTimeoutId);
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) return () => clearTimeout(stateTimeoutId);
 
     let animId: number;
     let frame = 0;
@@ -197,6 +195,7 @@ export default function LiveFeed() {
     render();
 
     return () => {
+      clearTimeout(stateTimeoutId);
       cancelAnimationFrame(animId);
     };
   }, [isSimulated]);

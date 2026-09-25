@@ -16,13 +16,15 @@ export default function Onboard() {
   const getOnboard = async () => {
     setIsLoading(true);
     try {
-      await supabase.auth.updateUser({
-        data: {
-          onboard: true,
-          station,
-          role,
-        },
-      });
+      if (supabase) {
+        await supabase.auth.updateUser({
+          data: {
+            onboard: true,
+            station,
+            role,
+          },
+        });
+      }
     } catch (err) {
       console.error(err);
     }

@@ -10,7 +10,6 @@ import {
   Radar,
   SlidersHorizontal,
   ArrowRight,
-  CheckCircle2,
   Cpu,
   Zap,
   Lock,
@@ -60,7 +59,7 @@ export default function Home() {
             </Link>
 
             <Link
-              href="/settings?demo=true"
+              href="/dashboard?demo=true"
               onClick={enterDashboard}
               className="flex items-center gap-2 rounded-2xl border border-border/70 bg-card/80 px-6 py-3.5 text-sm font-semibold text-foreground backdrop-blur shadow-sm transition hover:border-primary/50"
             >

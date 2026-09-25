@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Header from "@/components/ui/Header";
-import ThemeToggle from "@/components/theme/theme-toggle";
 import CameraWall from "@/components/ibvap/CameraWall";
 import AlertsTable from "@/components/ibvap/AlertsTable";
 import EngineStatus from "@/components/ibvap/EngineStatus";
@@ -17,7 +16,9 @@ import {
   AlertTriangle,
   Info,
   Car,
+  Clock3,
 } from "lucide-react";
+import IbvapLogo from "@/components/ui/IbvapLogo";
 
 // ─── Stat card ────────────────────────────────────────────────────────────────
 
@@ -65,7 +66,8 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    loadHistory();
+    const timeoutId = setTimeout(loadHistory, 0);
+    return () => clearTimeout(timeoutId);
   }, [loadHistory]);
 
   // Real-time WebSocket alerts
@@ -116,26 +118,24 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(46,107,88,0.18),transparent_28%),linear-gradient(135deg,var(--background),color-mix(in_srgb,var(--background)_82%,var(--primary)_18%))] text-foreground">
       <Header />
 
-      <main className="mx-auto flex max-w-[1600px] flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto flex max-w-[1600px] flex-col gap-4 px-4 py-5 sm:px-6 lg:px-8">
 
         {/* ── Page header ─────────────────────────────────────────────────── */}
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-[1.75rem] border border-border/70 bg-card/80 p-6 shadow-[0_20px_60px_rgba(20,36,32,0.12)] backdrop-blur-xl">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-primary/25 bg-card/80 px-5 py-4 shadow-[0_20px_60px_rgba(20,36,32,0.12)] backdrop-blur-xl">
           <div className="flex flex-wrap items-center gap-4">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
+              <IbvapLogo className="h-7 w-7" />
+            </div>
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-                IBVAP
-              </p>
-              <h2 className="mt-1 text-2xl font-semibold text-foreground">
-                Surveillance Dashboard
-              </h2>
+              <h2 className="text-2xl font-bold text-foreground">Surveillance Dashboard</h2>
             </div>
             <EngineStatus />
           </div>
-          <ThemeToggle />
+          <RealWorldTime />
         </div>
 
         {/* ── Stat cards ──────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard
             icon={<ShieldAlert className="h-5 w-5 text-primary" />}
             label="Total Alerts"
@@ -163,10 +163,10 @@ export default function Dashboard() {
         </div>
 
         {/* ── Camera wall + alert queue ───────────────────────────────────── */}
-        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_28rem]">
           <CameraWall />
 
-          <div className="min-h-[34rem]">
+          <div className="min-h-[34rem] xl:max-h-[42rem]">
             <AlertsTable alerts={alerts} />
           </div>
         </div>
@@ -174,6 +174,59 @@ export default function Dashboard() {
         {/* ── Event-type breakdown ─────────────────────────────────────────── */}
         <EventBreakdown alerts={alerts} />
       </main>
+    </div>
+  );
+}
+
+function RealWorldTime() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const updateTime = () => setNow(new Date());
+    const timeoutId = setTimeout(updateTime, 0);
+    const intervalId = setInterval(updateTime, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  const time = now
+    ? new Intl.DateTimeFormat(undefined, {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      }).format(now)
+    : "--:--:--";
+  const date = now
+    ? new Intl.DateTimeFormat(undefined, {
+        weekday: "short",
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }).format(now)
+    : "Loading local time";
+  const timezone = now
+    ? new Intl.DateTimeFormat(undefined, { timeZoneName: "short" })
+        .formatToParts(now)
+        .find((part) => part.type === "timeZoneName")?.value
+    : "";
+
+  return (
+    <div
+      className="flex items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 px-3 py-2"
+      aria-label={`Current local time: ${date}, ${time} ${timezone}`}
+    >
+      <Clock3 className="h-5 w-5 text-primary" />
+      <div className="text-right">
+        <p className="font-mono text-sm font-semibold tabular-nums text-foreground">
+          {time}
+          {timezone ? <span className="ml-1.5 text-[10px] text-primary">{timezone}</span> : null}
+        </p>
+        <p className="text-[10px] font-medium text-muted-foreground">{date}</p>
+      </div>
     </div>
   );
 }

@@ -22,9 +22,12 @@ export default function EngineStatus() {
   };
 
   useEffect(() => {
-    check();
+    const timeoutId = setTimeout(check, 0);
     const id = setInterval(check, 10_000);
-    return () => clearInterval(id);
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(id);
+    };
   }, []);
 
   const config = {

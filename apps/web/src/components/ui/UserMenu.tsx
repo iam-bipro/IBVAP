@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, LogOut, Settings, UserRound, Shield } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function UserMenu() {
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [userName, setUserName] = useState("IBVAP");
@@ -21,27 +21,29 @@ export default function UserMenu() {
     let isMounted = true;
 
     async function loadUser() {
-      try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
+      if (supabase) {
+        try {
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
 
-        if (!isMounted) return;
+          if (!isMounted) return;
 
-        if (user) {
-          const resolvedName =
-            user?.user_metadata?.full_name ||
-            user?.email?.split("@")[0] ||
-            "IBVAP";
-          setUserName(resolvedName);
-          setEmail(user?.email || "officer@ibvap.local");
-          setIsAuthenticated(true);
-          setIsDemo(false);
-          setIsLoading(false);
-          return;
+          if (user) {
+            const resolvedName =
+              user?.user_metadata?.full_name ||
+              user?.email?.split("@")[0] ||
+              "IBVAP";
+            setUserName(resolvedName);
+            setEmail(user?.email || "officer@ibvap.local");
+            setIsAuthenticated(true);
+            setIsDemo(false);
+            setIsLoading(false);
+            return;
+          }
+        } catch {
+          // Supabase unreachable
         }
-      } catch {
-        // Supabase unreachable
       }
 
       // Check for demo cookie
@@ -79,10 +81,12 @@ export default function UserMenu() {
   }, [supabase]);
 
   async function handleLogout() {
-    try {
-      await supabase.auth.signOut();
-    } catch {
-      // ignore
+    if (supabase) {
+      try {
+        await supabase.auth.signOut();
+      } catch {
+        // ignore
+      }
     }
     if (typeof document !== "undefined") {
       document.cookie = "ibvap-demo-user=; path=/; max-age=0";
@@ -91,11 +95,6 @@ export default function UserMenu() {
     router.replace("/auth");
     router.refresh();
   }
-
-  const handleSettings = () => {
-    setIsOpen(false);
-    router.push("/settings");
-  };
 
   if (isLoading || !isAuthenticated) return null;
 
@@ -133,14 +132,6 @@ export default function UserMenu() {
             <p className="text-xs text-muted-foreground">{email}</p>
           </div>
 
-          <button
-            type="button"
-            onClick={handleSettings}
-            className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-foreground transition hover:bg-background"
-          >
-            <Settings className="h-4 w-4 text-primary" />
-            Geometry Config
-          </button>
           <button
             type="button"
             onClick={handleLogout}

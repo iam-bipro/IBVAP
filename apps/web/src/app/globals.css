@@ -21,51 +21,51 @@
   --radius: 0.625rem;
 
   /* Surfaces */
-  --background: #f5f7f6;
-  --foreground: #142420;
-  --card: #ffffff;
-  --card-foreground: #142420;
-  --popover: #ffffff;
-  --popover-foreground: #142420;
+  --background: #031714;
+  --foreground: #e7f7f2;
+  --card: #061f1d;
+  --card-foreground: #e7f7f2;
+  --popover: #082522;
+  --popover-foreground: #e7f7f2;
 
   /* Brand — verdigris */
-  --primary: #2e6b58;
-  --primary-foreground: #f5f7f6;
+  --primary: #22d3b2;
+  --primary-foreground: #031714;
 
   /* Structure */
-  --secondary: #e8ede9;
-  --secondary-foreground: #1c2e28;
-  --muted: #e8ede9;
-  --muted-foreground: #5e716a;
-  --accent: #e8ede9;
-  --accent-foreground: #1c2e28;
-  --border: #dce4df;
-  --input: #dce4df;
-  --ring: #2e6b58;
+  --secondary: #0b302c;
+  --secondary-foreground: #d6eee8;
+  --muted: #0b302c;
+  --muted-foreground: #8caea6;
+  --accent: #0b302c;
+  --accent-foreground: #e7f7f2;
+  --border: #0b4b44;
+  --input: #0b4b44;
+  --ring: #22d3b2;
 
   /* Semantic — the three metals */
-  --positive: #2e7d5b;   /* income, under-budget, growth   */
-  --negative: #b4472e;   /* expense, over-budget, decline  */
-  --warning: #b4831f;    /* nearing a limit, needs a look  */
-  --destructive: #b4472e;
-  --destructive-foreground: #f5f7f6;
+  --positive: #22d3b2;
+  --negative: #ff755e;
+  --warning: #f4c542;
+  --destructive: #ff755e;
+  --destructive-foreground: #031714;
 
   /* Chart categories — same family, spaced for legibility */
-  --chart-1: #2e7d5b;
-  --chart-2: #b4472e;
-  --chart-3: #b4831f;
-  --chart-4: #4c6b8a;
-  --chart-5: #8a5a7a;
+  --chart-1: #22d3b2;
+  --chart-2: #ff755e;
+  --chart-3: #f4c542;
+  --chart-4: #38a8e8;
+  --chart-5: #9c7cff;
 
   /* Sidebar / studio-nav */
-  --sidebar: #eef2f0;
-  --sidebar-foreground: #142420;
-  --sidebar-primary: #2e6b58;
-  --sidebar-primary-foreground: #f5f7f6;
-  --sidebar-accent: #e0e8e3;
-  --sidebar-accent-foreground: #1c2e28;
-  --sidebar-border: #d5ded8;
-  --sidebar-ring: #2e6b58;
+  --sidebar: #041b18;
+  --sidebar-foreground: #e7f7f2;
+  --sidebar-primary: #22d3b2;
+  --sidebar-primary-foreground: #031714;
+  --sidebar-accent: #0b302c;
+  --sidebar-accent-foreground: #e7f7f2;
+  --sidebar-border: #0b4b44;
+  --sidebar-ring: #22d3b2;
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -73,51 +73,51 @@
 
 .dark {
   /* Surfaces */
-  --background: #0d1512;
-  --foreground: #e7efea;
-  --card: #131c18;
-  --card-foreground: #e7efea;
-  --popover: #131c18;
-  --popover-foreground: #e7efea;
+  --background: #031714;
+  --foreground: #e7f7f2;
+  --card: #061f1d;
+  --card-foreground: #e7f7f2;
+  --popover: #082522;
+  --popover-foreground: #e7f7f2;
 
   /* Brand — verdigris, lifted for contrast on dark */
-  --primary: #4fae8c;
-  --primary-foreground: #0d1512;
+  --primary: #22d3b2;
+  --primary-foreground: #031714;
 
   /* Structure */
-  --secondary: #1b2621;
-  --secondary-foreground: #e7efea;
-  --muted: #1b2621;
-  --muted-foreground: #8ca69b;
-  --accent: #1b2621;
-  --accent-foreground: #e7efea;
-  --border: #223027;
-  --input: #223027;
-  --ring: #4fae8c;
+  --secondary: #0b302c;
+  --secondary-foreground: #d6eee8;
+  --muted: #0b302c;
+  --muted-foreground: #8caea6;
+  --accent: #0b302c;
+  --accent-foreground: #e7f7f2;
+  --border: #0b4b44;
+  --input: #0b4b44;
+  --ring: #22d3b2;
 
   /* Semantic — the three metals, brightened for dark surfaces */
-  --positive: #4fae8c;
-  --negative: #e0745a;
-  --warning: #d6a44d;
-  --destructive: #e0745a;
-  --destructive-foreground: #0d1512;
+  --positive: #22d3b2;
+  --negative: #ff755e;
+  --warning: #f4c542;
+  --destructive: #ff755e;
+  --destructive-foreground: #031714;
 
   /* Chart categories */
-  --chart-1: #4fae8c;
-  --chart-2: #e0745a;
-  --chart-3: #d6a44d;
-  --chart-4: #7da0c4;
-  --chart-5: #b586a8;
+  --chart-1: #22d3b2;
+  --chart-2: #ff755e;
+  --chart-3: #f4c542;
+  --chart-4: #38a8e8;
+  --chart-5: #9c7cff;
 
   /* Sidebar / studio-nav */
-  --sidebar: #101a16;
-  --sidebar-foreground: #e7efea;
-  --sidebar-primary: #4fae8c;
-  --sidebar-primary-foreground: #0d1512;
-  --sidebar-accent: #1b2621;
-  --sidebar-accent-foreground: #e7efea;
-  --sidebar-border: #223027;
-  --sidebar-ring: #4fae8c;
+  --sidebar: #041b18;
+  --sidebar-foreground: #e7f7f2;
+  --sidebar-primary: #22d3b2;
+  --sidebar-primary-foreground: #031714;
+  --sidebar-accent: #0b302c;
+  --sidebar-accent-foreground: #e7f7f2;
+  --sidebar-border: #0b4b44;
+  --sidebar-ring: #22d3b2;
 }
 
 @theme inline {

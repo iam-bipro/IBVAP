@@ -15,20 +15,19 @@ export default async function ProtectedLayout({
     return <>{children}</>;
   }
 
+  let hasUser = false;
   try {
     const supabase = await createClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
-
-    if (user) {
-      return <>{children}</>;
-    }
+    hasUser = Boolean(user);
   } catch (err) {
     // Supabase endpoint offline or unconfigured
     console.warn("Supabase auth check failed in ProtectedLayout, falling back to demo session:", err);
-    return <>{children}</>;
+    hasUser = true;
   }
 
+  if (hasUser) return <>{children}</>;
   redirect("/auth");
 }

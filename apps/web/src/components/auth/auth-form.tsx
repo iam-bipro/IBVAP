@@ -36,6 +36,12 @@ export default function AuthForm({ initialTab = "login" }: AuthFormProps) {
     setIsLoading(true);
 
     try {
+      if (!supabase) {
+        setErrorMessage("Supabase is not configured. Use Demo Login or configure the environment variables.");
+        setIsLoading(false);
+        return;
+      }
+
       if (activeTab === "login") {
         const { data, error } = await supabase.auth.signInWithPassword({
           email,

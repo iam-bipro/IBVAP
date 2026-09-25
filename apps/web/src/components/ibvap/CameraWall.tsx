@@ -105,7 +105,7 @@ export default function CameraWall() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 p-3 sm:grid-cols-2 2xl:grid-cols-4">
+      <div className="grid max-h-[42rem] grid-cols-1 gap-3 overflow-y-auto p-3 sm:grid-cols-2 [scrollbar-color:var(--primary)_transparent]">
         {CAMERAS.map((camera) => {
           const status = STATUS_STYLES[camera.status];
           const StatusIcon = status.icon;
