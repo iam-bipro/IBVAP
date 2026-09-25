@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Header from "@/components/ui/Header";
 import ThemeToggle from "@/components/theme/theme-toggle";
-import LiveFeed from "@/components/ibvap/LiveFeed";
+import CameraWall from "@/components/ibvap/CameraWall";
 import AlertsTable from "@/components/ibvap/AlertsTable";
 import EngineStatus from "@/components/ibvap/EngineStatus";
 import {
@@ -110,14 +110,13 @@ export default function Dashboard() {
   // Derived stats
   const criticalCount = alerts.filter((a) => a.severity === "CRITICAL").length;
   const warningCount = alerts.filter((a) => a.severity === "WARNING").length;
-  const infoCount = alerts.filter((a) => a.severity === "INFO").length;
   const anprCount = alerts.filter((a) => a.event_type === "ANPR_DETECT").length;
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(46,107,88,0.18),transparent_28%),linear-gradient(135deg,var(--background),color-mix(in_srgb,var(--background)_82%,var(--primary)_18%))] text-foreground">
       <Header />
 
-      <main className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto flex max-w-[1600px] flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
 
         {/* ── Page header ─────────────────────────────────────────────────── */}
         <div className="flex flex-wrap items-center justify-between gap-4 rounded-[1.75rem] border border-border/70 bg-card/80 p-6 shadow-[0_20px_60px_rgba(20,36,32,0.12)] backdrop-blur-xl">
@@ -163,15 +162,11 @@ export default function Dashboard() {
           />
         </div>
 
-        {/* ── Main split: feed + alerts ────────────────────────────────────── */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
-          {/* Live feed — 3/5 */}
-          <div className="lg:col-span-3">
-            <LiveFeed />
-          </div>
+        {/* ── Camera wall + alert queue ───────────────────────────────────── */}
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+          <CameraWall />
 
-          {/* Alerts table — 2/5, fixed height with scroll */}
-          <div className="lg:col-span-2" style={{ minHeight: "400px" }}>
+          <div className="min-h-[34rem]">
             <AlertsTable alerts={alerts} />
           </div>
         </div>
