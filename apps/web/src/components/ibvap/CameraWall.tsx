@@ -1,20 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import {
   Activity,
-  Camera,
   Maximize2,
   MoreHorizontal,
-  Radio,
-  TriangleAlert,
-  Wifi,
   WifiOff,
 } from "lucide-react";
 
 type CameraStatus = "live" | "attention" | "offline";
 
-type CameraFeed = {
+export type CameraFeed = {
   id: string;
   sector: string;
   location: string;
@@ -25,7 +20,7 @@ type CameraFeed = {
   tone: string;
 };
 
-const CAMERAS: CameraFeed[] = [
+export const CAMERAS: CameraFeed[] = [
   { id: "BOP-01", sector: "Sector Alpha", location: "North Gate", status: "live", fps: 30, latency: 18, tone: "from-emerald-950 via-slate-950 to-sky-950" },
   { id: "BOP-02", sector: "Sector Alpha", location: "Perimeter West", status: "live", fps: 29, latency: 21, tone: "from-slate-950 via-teal-950 to-emerald-950" },
   { id: "BOP-03", sector: "Sector Bravo", location: "Vehicle Checkpoint", status: "attention", fps: 30, latency: 24, alert: "Vehicle detected", tone: "from-slate-950 via-amber-950 to-stone-950" },
@@ -38,101 +33,55 @@ const CAMERAS: CameraFeed[] = [
   { id: "BOP-10", sector: "Sector Echo", location: "South Gate", status: "live", fps: 29, latency: 22, tone: "from-teal-950 via-slate-950 to-blue-950" },
 ];
 
-const STATUS_STYLES: Record<CameraStatus, { label: string; className: string; icon: typeof Wifi }> = {
-  live: {
-    label: "Live",
-    className: "bg-emerald-400/15 text-emerald-200 ring-emerald-300/25",
-    icon: Wifi,
-  },
-  attention: {
-    label: "Attention",
-    className: "bg-amber-400/15 text-amber-100 ring-amber-300/25",
-    icon: TriangleAlert,
-  },
-  offline: {
-    label: "Offline",
-    className: "bg-white/10 text-white/70 ring-white/15",
-    icon: WifiOff,
-  },
-};
-
 function CameraPreview({ camera }: { camera: CameraFeed }) {
   return (
     <div className={`absolute inset-0 bg-gradient-to-br ${camera.tone}`}>
       <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(148,163,184,.28)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,.28)_1px,transparent_1px)] [background-size:34px_34px]" />
       <div className="absolute -left-8 top-[42%] h-px w-[115%] -rotate-6 bg-white/20" />
-      <div className="absolute bottom-[18%] left-[14%] h-[34%] w-[23%] rounded-sm border-2 border-emerald-300/75 shadow-[0_0_18px_rgba(110,231,183,.24)]" />
-      <div className="absolute bottom-[18%] left-[14%] -translate-y-full rounded-t-sm bg-emerald-300 px-1.5 py-0.5 font-mono text-[8px] font-bold text-emerald-950">
+      <div className="absolute bottom-[16%] left-[14%] h-[34%] w-[23%] rounded-sm border-2 border-emerald-300/75 shadow-[0_0_18px_rgba(110,231,183,.24)]" />
+      <div className="absolute bottom-[16%] left-[14%] -translate-y-full rounded-t-sm bg-emerald-300 px-1.5 py-0.5 font-mono text-[8px] font-bold text-emerald-950">
         PERSON 94%
       </div>
       <div className="absolute right-[17%] top-[28%] h-[18%] w-[28%] rounded-sm border-2 border-sky-300/65" />
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/55 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/75 to-transparent" />
       {camera.status === "offline" && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/55 text-white/75">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/85 text-white/75">
           <WifiOff className="h-7 w-7" />
-          <span className="text-[11px] font-medium">Signal unavailable</span>
+          <span className="text-[11px] font-semibold uppercase">Offline</span>
         </div>
       )}
     </div>
   );
 }
 
-export default function CameraWall() {
-  const [selectedId, setSelectedId] = useState(CAMERAS[0].id);
-  const liveCount = CAMERAS.filter((camera) => camera.status === "live").length;
-
+export default function CameraWall({ selectedId, onSelect }: { selectedId: string; onSelect: (camera: CameraFeed) => void }) {
   return (
-    <section className="overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/80 shadow-[0_20px_60px_rgba(20,36,32,0.12)] backdrop-blur-xl">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/70 px-5 py-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <Camera className="h-4.5 w-4.5" />
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold text-foreground">Camera Wall</h3>
-            <p className="text-xs text-muted-foreground">10 border surveillance feeds</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 text-xs">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 font-semibold text-emerald-700 dark:text-emerald-300">
-            <Radio className="h-3 w-3" />
-            {liveCount} live
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-2.5 py-1 font-semibold text-amber-700 dark:text-amber-300">
-            <TriangleAlert className="h-3 w-3" />
-            2 require attention
-          </span>
-        </div>
-      </div>
-
-      <div className="grid max-h-[42rem] grid-cols-1 gap-3 overflow-y-auto p-3 sm:grid-cols-2 [scrollbar-color:var(--primary)_transparent]">
+    <section className="overflow-hidden rounded-xl border border-border bg-card/30">
+      <div className="grid max-h-[39rem] grid-cols-1 gap-3 overflow-y-auto p-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 [scrollbar-color:var(--primary)_transparent]">
         {CAMERAS.map((camera) => {
-          const status = STATUS_STYLES[camera.status];
-          const StatusIcon = status.icon;
           const selected = selectedId === camera.id;
 
           return (
             <button
               type="button"
               key={camera.id}
-              onClick={() => setSelectedId(camera.id)}
-              className={`group relative aspect-video overflow-hidden rounded-xl border text-left shadow-sm transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
+              onClick={() => onSelect(camera)}
+              className={`group relative aspect-[1.35/1] overflow-hidden rounded-lg border bg-[#080808] text-left shadow-sm transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-card ${
                 selected
-                  ? "border-primary ring-2 ring-primary/35"
-                  : "border-white/10 hover:border-primary/65 hover:shadow-lg"
+                  ? "border-primary ring-1 ring-primary/60"
+                  : camera.status === "attention"
+                    ? "border-primary hover:shadow-lg"
+                    : "border-border hover:border-primary/65 hover:shadow-lg"
               }`}
               aria-pressed={selected}
               aria-label={`Select ${camera.id}, ${camera.location}`}
             >
               <CameraPreview camera={camera} />
 
-              <div className="absolute left-2 top-2 flex items-center gap-1.5">
-                <span className="rounded-md bg-black/65 px-2 py-1 font-mono text-[10px] font-bold tracking-wide text-white">
-                  {camera.id}
-                </span>
-                <span className={`inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-[9px] font-bold uppercase ring-1 ${status.className}`}>
-                  <StatusIcon className="h-2.5 w-2.5" />
-                  {status.label}
+              <div className="absolute inset-x-0 top-0 z-10 flex h-9 items-center gap-2 bg-black/75 px-2.5">
+                <span className={`h-2.5 w-2.5 rounded-full ${camera.status === "live" ? "bg-emerald-500" : "bg-primary"}`} />
+                <span className="truncate text-[11px] font-semibold tracking-tight text-white">
+                  {camera.id} - {camera.location}
                 </span>
               </div>
 
@@ -141,17 +90,16 @@ export default function CameraWall() {
                 <span className="rounded-md bg-black/60 p-1 text-white/85"><MoreHorizontal className="h-3 w-3" /></span>
               </div>
 
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-2.5 text-white">
+              <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-2 p-2 text-white">
                 <div className="min-w-0">
-                  <p className="truncate text-[11px] font-semibold">{camera.location}</p>
-                  <p className="truncate text-[9px] text-white/65">{camera.sector}</p>
+                  <p className="rounded bg-black/75 px-1.5 py-1 font-mono text-[9px] font-medium">10:40:{camera.id.slice(-1).padStart(2, "0")} WIB</p>
                 </div>
                 {camera.status === "offline" ? (
-                  <span className="text-[9px] font-medium text-white/60">Reconnect pending</span>
+                  <span className="text-[9px] font-medium text-white/60">Signal unavailable</span>
                 ) : camera.alert ? (
-                  <span className="rounded bg-amber-300/20 px-1.5 py-0.5 text-[9px] font-semibold text-amber-100">{camera.alert}</span>
+                  <span className="rounded bg-primary px-2 py-1 text-[9px] font-bold uppercase text-white">Alert</span>
                 ) : (
-                  <span className="flex items-center gap-1 font-mono text-[9px] text-white/75"><Activity className="h-2.5 w-2.5 text-emerald-300" />{camera.fps} FPS</span>
+                  <span className="flex items-center gap-1 font-mono text-[9px] text-white/75"><Activity className="h-2.5 w-2.5 text-emerald-300" />Live</span>
                 )}
               </div>
             </button>
@@ -159,7 +107,7 @@ export default function CameraWall() {
         })}
       </div>
 
-      <div className="flex items-center justify-between border-t border-border/70 px-5 py-3 text-xs text-muted-foreground">
+      <div className="flex items-center justify-between border-t border-border/70 px-4 py-2.5 text-xs text-muted-foreground">
         <span>Selected: <strong className="font-semibold text-foreground">{selectedId}</strong></span>
         <span>UI preview mode · stream assignment comes next</span>
       </div>

@@ -32,7 +32,7 @@ function NumberField({
   label: string;
 }) {
   return (
-    <label className="flex min-w-0 flex-1 items-center justify-between rounded-md border border-primary/20 bg-[#031b17] px-2 py-1.5">
+    <label className="flex min-w-0 flex-1 items-center justify-between rounded-md border border-primary/20 bg-[#111111] px-2 py-1.5">
       <span className="text-[9px] text-muted-foreground">{label}</span>
       <input
         aria-label={label}
@@ -109,7 +109,7 @@ export default function ConfigDrawer({
         role="dialog"
         aria-modal="true"
         aria-labelledby="configuration-drawer-title"
-        className={`absolute right-0 top-0 flex h-full w-full max-w-[25rem] flex-col border-l border-primary/20 bg-[#041b18] text-foreground shadow-2xl transition-transform duration-300 ease-out ${
+        className={`absolute right-0 top-0 flex h-full w-full max-w-[25rem] flex-col border-l border-primary/20 bg-[#0b0b0b] text-foreground shadow-2xl transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -118,7 +118,7 @@ export default function ConfigDrawer({
             <Settings className="h-4 w-4 text-primary" />
             <div>
               <p id="configuration-drawer-title" className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-                Configuration
+                Settings
               </p>
               <p className="text-[9px] text-muted-foreground">Live surveillance controls</p>
             </div>
@@ -135,7 +135,7 @@ export default function ConfigDrawer({
         </div>
 
         <div className="flex-1 overflow-y-auto px-3 py-3">
-          <section className="rounded-lg border border-primary/20 bg-[#06231f] p-2.5">
+          <section className="rounded-lg border border-primary/20 bg-[#151515] p-2.5">
             <div className="mb-2 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <Radio className="h-3 w-3 text-primary" />
@@ -148,7 +148,7 @@ export default function ConfigDrawer({
               <select
                 value={camera}
                 onChange={(event) => setCamera(event.target.value)}
-                className="w-full appearance-none rounded-md border border-primary/25 bg-[#031b17] px-2 py-2 pr-7 text-[10px] text-foreground outline-none focus:border-primary"
+                className="w-full appearance-none rounded-md border border-primary/25 bg-[#111111] px-2 py-2 pr-7 text-[10px] text-foreground outline-none focus:border-primary"
               >
                 {["BOP-01 — North Gate (Sector Alpha)", "BOP-02 — Perimeter West", "BOP-03 — River Checkpoint", "BOP-04 — East Watchtower"].map((option) => (
                   <option key={option}>{option}</option>
@@ -156,14 +156,14 @@ export default function ConfigDrawer({
               </select>
               <ChevronDown className="pointer-events-none absolute right-2 top-2.5 h-3 w-3 text-primary" />
             </label>
-            <div className="mt-2 grid grid-cols-3 gap-2 rounded-md bg-[#031b17] p-2 font-mono text-[8px] text-muted-foreground">
+            <div className="mt-2 grid grid-cols-3 gap-2 rounded-md bg-[#111111] p-2 font-mono text-[8px] text-muted-foreground">
               <span>IP ADDR:<b className="block font-normal text-foreground">192.168.10.41</b></span>
               <span>ENCODER:<b className="block font-normal text-foreground">H.264 Main</b></span>
               <span>LATENCY:<b className="block font-normal text-primary">~45 ms</b></span>
             </div>
           </section>
 
-          <section className="mt-2 rounded-lg border border-primary/20 bg-[#06231f] p-2.5">
+          <section className="mt-2 rounded-lg border border-primary/20 bg-[#151515] p-2.5">
             <div className="mb-2 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <Crosshair className="h-3 w-3 text-warning" />
@@ -185,7 +185,7 @@ export default function ConfigDrawer({
             <p className="mt-2 text-[9px] text-muted-foreground">Alert crossing direction</p>
             <div className="mt-1 grid grid-cols-3 gap-1">
               {["Bi-Directional", "Ingress Only (+)", "Egress Only (-)"].map((option) => (
-                <button key={option} type="button" onClick={() => { setDirection(option); setSaved(false); }} className={`rounded border px-1 py-1.5 text-[8px] font-semibold transition ${direction === option ? "border-primary bg-primary text-primary-foreground" : "border-primary/20 bg-[#031b17] text-muted-foreground hover:border-primary/50"}`}>{option}</button>
+                <button key={option} type="button" onClick={() => { setDirection(option); setSaved(false); }} className={`rounded border px-1 py-1.5 text-[8px] font-semibold transition ${direction === option ? "border-primary bg-primary text-primary-foreground" : "border-primary/20 bg-[#111111] text-muted-foreground hover:border-primary/50"}`}>{option}</button>
               ))}
             </div>
             <label className="mt-2 block text-[9px] text-muted-foreground">
@@ -194,7 +194,7 @@ export default function ConfigDrawer({
             </label>
           </section>
 
-          <section className="mt-2 rounded-lg border border-primary/20 bg-[#06231f] p-2.5">
+          <section className="mt-2 rounded-lg border border-primary/20 bg-[#151515] p-2.5">
             <div className="mb-2 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <Target className="h-3 w-3 text-primary" />
@@ -204,7 +204,7 @@ export default function ConfigDrawer({
             </div>
             <div className="space-y-1.5">
               {points.map((point, index) => (
-                <div key={point.label} className="grid grid-cols-[1fr_1fr_1fr] items-center gap-1 rounded-md border border-primary/15 bg-[#031b17] px-2 py-1">
+                <div key={point.label} className="grid grid-cols-[1fr_1fr_1fr] items-center gap-1 rounded-md border border-primary/15 bg-[#111111] px-2 py-1">
                   <span className="text-[8px] font-medium text-primary">{point.label}</span>
                   <NumberField label="X" value={point.x} onChange={(value) => updatePoint(index, "x", value)} />
                   <NumberField label="Y" value={point.y} onChange={(value) => updatePoint(index, "y", value)} />
@@ -217,7 +217,7 @@ export default function ConfigDrawer({
           </section>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 border-t border-primary/20 bg-[#031714] p-3">
+        <div className="grid grid-cols-3 gap-2 border-t border-primary/20 bg-[#070707] p-3">
           <button type="button" onClick={onClose} className="rounded-md border border-primary/20 px-2 py-2 text-[9px] font-semibold text-muted-foreground transition hover:border-primary/50">Discard</button>
           <button type="button" onClick={() => setSaved(false)} className="flex items-center justify-center gap-1 rounded-md border border-warning/30 px-2 py-2 text-[9px] font-semibold text-warning transition hover:bg-warning/10"><CircleHelp className="h-3 w-3" /> Test Trigger</button>
           <button type="button" onClick={publishLive} className="flex items-center justify-center gap-1 rounded-md bg-primary px-2 py-2 text-[9px] font-bold text-primary-foreground transition hover:opacity-90"><Save className="h-3 w-3" /> {saved ? "Published" : "Publish Live"}</button>

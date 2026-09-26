@@ -105,14 +105,14 @@ export default function UserMenu() {
       <button
         type="button"
         onClick={() => setIsOpen((value) => !value)}
-        className="flex items-center gap-2 rounded-full border border-border/70 bg-background/80 px-2 py-1.5 shadow-sm transition hover:border-primary/40 hover:bg-background"
+        className="flex max-w-[10rem] items-center gap-2 rounded-full border border-border/70 bg-background/80 px-2 py-1.5 shadow-sm transition hover:border-primary/40 hover:bg-background"
         aria-haspopup="menu"
         aria-expanded={isOpen}
       >
         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
           {initial}
         </div>
-        <span className="hidden sm:inline text-xs font-medium text-foreground">
+        <span className="hidden truncate text-xs font-medium text-foreground sm:inline">
           {userName}
         </span>
         <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
